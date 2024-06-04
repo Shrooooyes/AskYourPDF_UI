@@ -1,0 +1,22 @@
+@media only screen and (max-width: 767px) {
+  .App {
+    height: calc(100vh - 50px);
+  }
+
+  .chat {
+    height: 72%;
+    width: 100%;
+  }
+
+  .type {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+  }
+
+  .user-name {
+    display: block;
+  }
+
+}
+

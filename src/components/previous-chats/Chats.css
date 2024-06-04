@@ -1,0 +1,27 @@
+.mainUI {
+  border: 2px solid black;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+
+  margin-top: 20vh;
+}
+
+.chatbody {
+  height: 50vh;
+  width: 90%;
+  border: 2px solid red;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.type {
+  border: 2px solid green;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-bottom: 20px;
+}
