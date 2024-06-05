@@ -13,6 +13,14 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const Login = (props) => {
 
+  //props
+  const handleProps_User = (userDetails, chat) => {
+    props.setUser({
+      "userData" : userDetails,
+      "chats" : chat
+    })
+  }
+
   const notify = (message) => toast.error(message);
   const notifySuccess = (message) => toast.success(message);
 
@@ -61,23 +69,23 @@ const Login = (props) => {
     }
 
     fetch('http://localhost:8000/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (!response.error) {
-          handleFlush()
-          notifySuccess("Sign-up Successful")
-        } else {
-          notify(response.error);
-          notify("Try using different Email")
-        }
-      })
-      .catch(error => {
-        notify("An error occurred while submitting the form.");
-      });
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (!response.error) {
+                    handleFlush()
+                    notifySuccess("Login Successful")
+                    handleProps_User(response,'xyz')
+                } else {
+                    notify(response.error);
+                }
+            })
+            .catch(error => {
+                notify("An error occurred while submitting the form.");
+            });
   };
 
 

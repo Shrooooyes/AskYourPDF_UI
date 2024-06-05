@@ -13,6 +13,10 @@ import SignUp from './components/login/SignUp'
 
 
 const App = () => {
+  const [user, setUser] = useState({
+    "userData": '',
+    "chats": ''
+  })
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -30,7 +34,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <ToastContainer />
       <nav class="navbar bg-transparent">
         <div class="container-fluid">
 
@@ -44,9 +47,23 @@ const App = () => {
             </button>
           }
           <span class=" mb-0 h3 text-white">AskYourPDF</span>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
-            <SignUp/>
+          <form className={user.userData === '' ? 'd-flex' : 'userbtn d-flex'} role="search">
+            {
+              user.userData === '' ?
+                <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
+                :
+                <div class=" dropdown">
+                  <button class="userbtn-btn btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {user['userData'].firstName}
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+            }
+            <SignUp setUser={setUser} />
           </form>
         </div>
       </nav>

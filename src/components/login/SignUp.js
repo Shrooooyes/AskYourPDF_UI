@@ -12,7 +12,16 @@ const disabilityTypes = {
 
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const SignUp = () => {
+const SignUp = (props) => {
+
+    //props
+    const handleProps_User = (userDetails, chat) => {
+        props.setUser({
+            "userData": userDetails,
+            "chats": chat
+        })
+    }
+
     const notify = (message) => toast.error(message);
     const notifySuccess = (message) => toast.success(message);
 
@@ -90,6 +99,8 @@ const SignUp = () => {
                 if (!response.error) {
                     handleFlush()
                     notifySuccess("Sign-up Successful")
+                    // console.log(response.user)
+                    handleProps_User(response, 'xyz')
                 } else {
                     notify(response.error);
                     notify("Try using different Email")
@@ -121,7 +132,7 @@ const SignUp = () => {
                     </div>
                     {
                         alreadyUser ?
-                            <Login setAlreadyUser = {setAlreadyUser}/>
+                            <Login setAlreadyUser={setAlreadyUser} setUser={props.setUser} />
                             :
                             <form noValidate>
                                 <div className="modal-body bg-dark">

@@ -110,3 +110,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+.userbtn {
+  width: 20%;
+}
+
+.userbtn-btn {
+  width: 100%;
+}
