@@ -3,6 +3,24 @@ import React, { useEffect, useState } from 'react';
 const ChatBody = (props) => {
     const [chat, setChat] = useState([]);
 
+    // useEffect(() => {
+    //     console.log("Chat Updated")
+    //     try {
+    //         fetch('http://localhost:8000/update-chat', {
+    //             "method": "POST",
+    //             "headers": { "Content-Type": "application/json" },
+    //             "body": {
+    //                 "chat": chat,
+    //                 "id": props.id,
+    //                 "email": props.email
+    //             }
+    //         })
+    //     }
+    //     catch(e){
+    //         console.log(e)
+    //     }
+    // }, [chat])
+
     useEffect(() => {
         if (props.userMessage.user && props.userMessage.id) {
             setChat(prevChat => {

@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CryptoJS from 'crypto-js'
+
+
 import Login from './Login';
+
 
 const disabilityTypes = {
     OH: "Locomotor disability (includes: cerebral palsy, leprosy cured, dwarfism, etc.)",
@@ -15,11 +20,11 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const SignUp = (props) => {
 
     //props
-    const handleProps_User = (userDetails, chat) => {
-        props.setUser({
-            "userData": userDetails,
-            "chats": chat
-        })
+    const handleProps_User = (response) => {
+        props.setUser(prevState => ({
+            'userData': response.user,
+            'chats' : response.chat
+        }))
     }
 
     const notify = (message) => toast.error(message);
@@ -100,7 +105,7 @@ const SignUp = (props) => {
                     handleFlush()
                     notifySuccess("Sign-up Successful")
                     // console.log(response.user)
-                    handleProps_User(response, 'xyz')
+                    handleProps_User(response)
                 } else {
                     notify(response.error);
                     notify("Try using different Email")
@@ -132,7 +137,7 @@ const SignUp = (props) => {
                     </div>
                     {
                         alreadyUser ?
-                            <Login setAlreadyUser={setAlreadyUser} setUser={props.setUser} />
+                            <Login setAlreadyUser={setAlreadyUser} setUser={props.setUser} user = {props.user} />
                             :
                             <form noValidate>
                                 <div className="modal-body bg-dark">

@@ -7,15 +7,15 @@ import './App.css'
 import './media-query.css'
 
 import Chat from './components/chat/Chat';
-import Uploads from './components/uploadedPDFs/Uploads';
-import UploadsSide from './components/uploadedPDFs/UploadsSide';
+import Uploads from './components/previous-chats/PreviousChats';
+import UploadsSide from './components/previous-chats/PreviousChatSide';
 import SignUp from './components/login/SignUp'
 
 
 const App = () => {
   const [user, setUser] = useState({
     "userData": '',
-    "chats": ''
+    "chats": null
   })
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -35,9 +35,9 @@ const App = () => {
   return (
     <div className="App">
       <nav class="navbar bg-transparent">
-        <div class="container-fluid">
+        <div class="container-fluid w-100">
 
-          <UploadsSide />
+          <UploadsSide user={user.chats} />
 
           {
             windowWidth > 760 ? <></> : <button className="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -47,7 +47,7 @@ const App = () => {
             </button>
           }
           <span class=" mb-0 h3 text-white">AskYourPDF</span>
-          <form className={user.userData === '' ? 'd-flex' : 'userbtn d-flex'} role="search">
+          <form className='d-flex' role="search">
             {
               user.userData === '' ?
                 <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
@@ -63,13 +63,13 @@ const App = () => {
                   </ul>
                 </div>
             }
-            <SignUp setUser={setUser} />
+            <SignUp setUser={setUser} user = {user}/>
           </form>
         </div>
       </nav>
       <div className="container-fluid p-0 d-flex">
-        {windowWidth <= 760 ? <></> : <Uploads />}
-        <Chat />
+        {windowWidth <= 760 ? <></> : <Uploads chats={user['chats']} />}
+        <Chat setUser = {setUser} user = {user} id = {0}/>
       </div>
     </div>
   );
